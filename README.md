@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+This project is an implemetation of REDUX. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The concept of redux is simplier when it is sperated in small pieces. While learning it, I found it easier to create specific folders for each:
+1. Actions, 
+2. Reducers, 
+3. Wrapper (also alphabetically to understan the order they execute) to include the 'combineReducers' component (since I have two different reducers (isLogged.js and points.js)) and also the store created to include the global components and making sure it is used all over the application by the << Provider >> component in index.js file. 
 
-## Available Scripts
+I try to imagine REDUX as a hierarchical scheme. On the top of the scheme is the 'store' componenet, making sure the global component is created and exported, so the developer can implement it in differnt files. Then the 'rootReducer', which holds the reducers created and makes sure to be included in the store because the rootReducer holds the component which store will get them available for use in different files of application. Then are the 'reducers', which are created by 'actions', while actions being the next step of creation. 'useDispatch' and 'useSelector' are the linking componentes that make the actions executable in one certain file and exporting the global state component in the file where we want to change it. Also, everything is spread by the 'Provider' component while creating the navigation of the file. 
 
-In the project directory, you can run:
+                                            1.Store         << Provider >>
+                                        [   2.rootReducer
+                                            3.reducers  ]   << useSelector >>
+                                            4.Actions       << useDispatch >>
 
-### `yarn start`
+--> EVERY TIME THE USER REFRESHES THE PAGE, THE STATE GOES BACK TO THE DEFAULT STATE! <--
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+--> I have also checked the << Immer >> library for deeply-nested object updates, where you can write the mutable code and Immer will take that code and produce a perfect immutable update. 
+To provide it:
+<< yarn add immer >>  and << import produce from 'immer'; >>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+--> About the aplication created:
 
-### `yarn test`
+To begin with to show how the state of application changes and when does it change, I have created this simple implemetation to understand the fundamentals of Redux. It starts by logging in and changing the default state of logging in from false to true. Since it returns true, we can navigate to Points.js file.
+Usullay it is better to use a 'Log in' action with a condition (such as username or password). Since it wasn't the main focus of the demo, the implemetation was to see how the state changes. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Then, after we navigate to << /points >> it is required to input the user's name and showing it in the screen.The remove and add buttons, execute a specific function that returns and shows in the screen the value we get after clicking them. The default state of both of them is << state = 0 >>. While clicking add/remove the state changes its' value to the number returned by the functions behind them. I suggest enabling the 'redux-dev-tools' in the browser for a better understanding. 
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+--> FOR MORE --> I would suggest reading the comments through the files to have a better visualisation. (I have also added CSS (my favourite))
